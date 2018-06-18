@@ -12,7 +12,7 @@ class Gallery extends React.Component{
     this.state = {
       showModal: false,
       url: '',
-      users: [],
+      imgurls: [],
     }
     
     this.openModal = this.openModal.bind(this);
@@ -21,18 +21,18 @@ class Gallery extends React.Component{
   }
  
   componentDidMount() {
-    let { users } = this.state;
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => {
-        return response.json();
-        console.log("users");
-      }).then(result => {
-        this.setState({
-          users:result
+    let { imgurls } = this.state;
+    const url = 'https://jsonplaceholder.typicode.com/photos';
+
+      fetch(url)
+        .then((response) => {
+          return response.json();
+        })
+        .then((json) => {
+          this.setState({
+              imgurls: json});
         });
-        console.log(users);
-      });
-      
+     console.log(imgurls); 
   }  
   render() {
     let {url} = this.state;
