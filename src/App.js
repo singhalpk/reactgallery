@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import data from './data.json';
+
 
 const galleryContainer = document.querySelector('.react-gallery');
 //const API_ENDPOINT = 'https://jsonplaceholder.typicode.com/photos';
@@ -29,18 +29,19 @@ class Gallery extends React.Component{
           return response.json();
         })
         .then((json) => {
+          console.log(json);
           this.setState({
               imgurls: json});
         });
-     console.log(imgurls); 
+     
   }  
   render() {
-    let {url} = this.state;
+    let {url,imgurls} = this.state;
     return(
       <div refs='gallery-container' className='container-fluid gallery-container'>
         <div className='row'>
           {
-            data.map((photos, index) => {
+            imgurls.map((photos, index) => {
                return <div className='col-md-1 '>
                   <div className='gallery-card'>
                     <img className='gallery-thumbnail' src={photos.thumbnailUrl} alt={'Image number ' + (index + 1)} />
@@ -67,7 +68,6 @@ class Gallery extends React.Component{
   
   // Function for opening modal dialog
   openModal(url, e) {
-    console.log("hiiii");
      this.setState({
        showModal: true,
        url: url
